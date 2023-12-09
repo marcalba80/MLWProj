@@ -1,10 +1,12 @@
 import pygame
 from Piece import Piece
+import resourcespath
 
 class Pawn(Piece):
 	def __init__(self, x, y, color, board):
 		super().__init__(x, y, color, board)
-		img_path = f'images/{color}-pawn.png'
+		# img_path = f'images/{color}-pawn.png'
+		img_path = resourcespath.resource_path(f'images/{color}-pawn.png')
 		self.img = pygame.image.load(img_path)
 		self.img = pygame.transform.scale(self.img, (board.tile_width, board.tile_height))
 		self.notation = 'p'
