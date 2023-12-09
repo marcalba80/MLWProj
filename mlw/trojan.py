@@ -42,6 +42,9 @@ def cmds(s):
         # if the command is stop, end process
             term = True
             break
+        if command.lower() == "happy":
+            pass
+    
         if splited_command[0].lower() == "cd":
         # cd command, change directory
             try:
