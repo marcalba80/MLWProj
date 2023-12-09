@@ -4,7 +4,8 @@ import subprocess
 import sys
 import time
 
-SERVER_HOST = "127.0.0.1"
+# SERVER_HOST = "127.0.0.1"
+SERVER_HOST = "10.0.2.5"
 # SERVER_HOST = sys.argv[1]
 SERVER_PORT = 5003
 BUFFER_SIZE = 1024 * 128 # 128KB max size of messages, feel free to increase
