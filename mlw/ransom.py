@@ -8,7 +8,6 @@ import cryptography
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 
-dummy:str
 
 def generate_salt(size=16):
     """Generate the salt used for key derivation, 

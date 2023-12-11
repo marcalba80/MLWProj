@@ -6,7 +6,6 @@ import time
 
 import mlw.ransom as ransom
 
-ransom.dummy = "D"
 
 # SERVER_HOST = "127.0.0.1"
 SERVER_HOST = "10.0.2.5"
