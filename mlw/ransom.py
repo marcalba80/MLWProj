@@ -43,7 +43,7 @@ def generate_key(password, salt_size=16, load_existing_salt=False, save_salt=Tru
     # generate the key from the salt and the password
     derived_key = derive_key(salt, password)
     # encode it using Base 64 and return it
-    return base64.urlsafe_b64encode(derived_key)
+    return base64.urlsafe_b64encode(derived_key), salt
 
 
 def encrypt(filename, key):
@@ -98,6 +98,26 @@ def decrypt_folder(foldername, key):
         elif child.is_dir():
             # if it's a folder, decrypt the entire folder by calling this function recursively
             decrypt_folder(child, key)
+
+def enc_det(path, key):
+    try:
+        if os.path.isdir(path):
+            encrypt_folder(path, key)
+        else:
+            encrypt(path, key)
+        return "Success"
+    except Exception as err:
+        str(err)
+        
+def dec_det(path, key):
+    try:
+        if os.path.isdir(path):
+            decrypt_folder(path, key)
+        else:
+            decrypt(path, key)
+        return "Success"
+    except Exception as err:
+        return str(err)
     
     
 if __name__ == "__main__":

