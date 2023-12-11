@@ -29,7 +29,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='Main',
+    name='CheckerGame',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
