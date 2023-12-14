@@ -107,14 +107,14 @@ int main(int argc, char **argv) {
         }
 
         // printf("char code[]=\"");
-        printf("\"");
+        // printf("\"");
         for (i = 0; i < strlen((char *)ebuf); i++) {
             // if (i > 0 && i % 15 == 0)
                 // printf("\"\n\""); 
             printf("\\x%02x", ebuf[i]);
         }
         // printf("\";\n\n");
-        printf("\"");
+        // printf("\"");
 
         return 0;
     } else {

