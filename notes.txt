@@ -1,0 +1,1 @@
+echo -ne "$(cat shelliteral/reverseshell_local.txt)" > shelliteral/reverseshell_local.bin

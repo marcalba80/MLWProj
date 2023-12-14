@@ -5,3 +5,6 @@ To generate a .exe executable:
 pip install -r requirements.txt
 
 pyinstaller.exe .\Main.spec
+
+Python byte compilation
+python -OO -m py_compile <your program.py>

