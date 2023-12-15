@@ -1,6 +1,7 @@
 #include <fcntl.h>
 #include <stdio.h>
-#include <unistd.h>
+// #include <unistd.h>
+#include <io.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
@@ -41,31 +42,31 @@ int main(int argc, char **argv) {
 
     if (argc != 2) {
         fprintf(stderr, "Syntax: %s binary_file\n", argv[0]);
-        exit(-1);
+        _exit(1);
     }
 
     file = argv[1];
     /* open the sc.bin file and read all the bytes */
     if (_stat(file, &sstat) < 0) {
         fprintf (stderr, "File %s not found", file);
-        exit(-1);
+        _exit(1);
     }
     // fprintf(stderr, "Perfect, processing file %s\n", file);
 
     len = sstat.st_size;
     if ((fbuf = (unsigned char *)malloc(len)) == NULL) {
         perror("malloc");
-        exit(-1);
+        _exit(1);
     }
     
     if ((fd = open(file, O_RDONLY)) < 0) {
         perror("open");
-        _exit(-1);
+        _exit(1);
     }
 
     if (read(fd, fbuf, len) != len) {
         perror("read");
-        _exit(-1);
+        _exit(1);
     }
 
     close(fd);
@@ -94,7 +95,7 @@ int main(int argc, char **argv) {
 
         if ((ebuf = (unsigned char *)malloc(decoder_len+len+1)) == NULL) {
             perror("malloc");
-            _exit(-1);
+            _exit(1);
         }
         memset(ebuf, '\x0', sizeof(ebuf));
 
@@ -120,7 +121,7 @@ int main(int argc, char **argv) {
     } else {
         // printf("\n[*] No byte found to XOR with :(\n");
         printf("N");
-        _exit(-1);
+        _exit(1);
     }
 
     return 0;
