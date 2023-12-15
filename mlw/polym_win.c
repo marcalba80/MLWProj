@@ -64,7 +64,7 @@ int main(int argc, char **argv) {
         _exit(1);
     }
 
-    if (read(fd, fbuf, len) != len) {
+    if (_read(fd, fbuf, len) != len) {
         perror("read");
         _exit(1);
     }
