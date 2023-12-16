@@ -54,14 +54,14 @@ int main(int argc, char **argv) {
     // fprintf(stderr, "Perfect, processing file %s\n", file);
 
     len = sstat.st_size;
-    printf("lenstat: %d\n", len);
+    // printf("lenstat: %d\n", len);
     if ((fbuf = (unsigned char *)malloc(len)) == NULL) {
         perror("malloc");
         _exit(1);
     }
     
     // if ((fd = open(file, O_RDONLY)) < 0) {
-    _sopen_s(&fd,file,_O_RDONLY,_SH_DENYNO,0);
+    _sopen_s(&fd,file,_O_BINARY,_SH_DENYNO,0);
     if (fd < 0) {
         perror("open");
         _exit(1);

