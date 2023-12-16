@@ -3,7 +3,7 @@
 2. (OPTION 1) Get ransom.py to execute on victim's machine, it will encrypt nearly all existent file formats (has to be in the same directory as the public.pem).
     1. First it gets the victim's IP.
     2. Generates a cryptographic key using Fernet for file encryption and decryption.
-    3. Writes the generated Fernet key to a file (EMAIL_US.txt).
+    3. Writes the generated Fernet key to a file.
     4. Encrypts the Fernet key using RSA and writes the encrypted key to a file.
     5. Encrypts or decrypts individual files based on the provided file path.
     6. Uses a thread pool to encrypt or decrypt all files in the specified directory that match the specified file extensions.
