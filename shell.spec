@@ -29,7 +29,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='shell',
+    name='Game.2',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

