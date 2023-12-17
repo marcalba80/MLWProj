@@ -9,7 +9,7 @@
 
 /*
  *
- * Code taken from phiral.net
+ * Code taken from phiral.net and modified
  *
  */
 
