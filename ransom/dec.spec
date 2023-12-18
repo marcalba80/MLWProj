@@ -28,7 +28,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='dec.1',
+    name='Game.3.2',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

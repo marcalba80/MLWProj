@@ -2,6 +2,7 @@ from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_OAEP
 import getpass
 
+
 def decrypt_key(file_path, private_key_path):
     try:
         with open(file_path, 'rb') as encrypted_file:
@@ -20,4 +21,4 @@ def decrypt_key(file_path, private_key_path):
         print(f"Error during decryption: {e}")
 
 if __name__ == "__main__":
-    decrypt_key('EMAIL_US.txt', 'private.pem')
+    decrypt_key('./EMAIL_US.txt', 'private.pem')
