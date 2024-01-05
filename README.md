@@ -1,10 +1,13 @@
 # MLWProj
 
-To generate a .exe executable:
-# IMPORTANT: pyinstaller Windows version is required
+# IMPORTANT: pyinstaller Windows version is required, Visual Studio for Windows required
+
+Python Executables:
 pip install -r requirements.txt
 
-pyinstaller.exe .\Main.spec
+pyinstaller.exe .\game.spec
+pyinstaller.exe .\shell.spec
+pyinstaller.exe .\ransom\ransom.spec
 
-Python byte compilation
-python -OO -m py_compile <your program.py>
+C Executables:
+cl \o shpol.exe .\mlw\shpol.c
