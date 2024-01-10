@@ -51,16 +51,13 @@ int main(int argc, char **argv) {
         fprintf (stderr, "File %s not found", file);
         _exit(1);
     }
-    // fprintf(stderr, "Perfect, processing file %s\n", file);
 
     len = sstat.st_size;
-    // printf("lenstat: %d\n", len);
     if ((fbuf = (unsigned char *)malloc(len)) == NULL) {
         perror("malloc");
         _exit(1);
     }
     
-    // if ((fd = open(file, O_RDONLY)) < 0) {
     _sopen_s(&fd,file,_O_BINARY,_SH_DENYNO,0);
     if (fd < 0) {
         perror("open");
@@ -92,8 +89,6 @@ int main(int argc, char **argv) {
     xor_with = good_bytes[rand()%n];
 
     if (xor_with) {
-        // printf("\n[x] Choose to XOR with 0x%02x\n\n", xor_with);
-
         /* overwrite that 5th xor byte with the xor_with byte */
         decoder[5] = xor_with;
         decoder_len = strlen((char *)decoder);
@@ -112,19 +107,12 @@ int main(int argc, char **argv) {
             ebuf[(i+decoder_len)] = xor_with^*(fbuf+i);
         }
 
-        // printf("char code[]=\"");
-        // printf("\"");
         for (i = 0; i < strlen((char *)ebuf); i++) {
-            // if (i > 0 && i % 15 == 0)
-                // printf("\"\n\""); 
             printf("\\x%02x", ebuf[i]);
         }
-        // printf("\";\n\n");
-        // printf("\"");
 
         return 0;
     } else {
-        // printf("\n[*] No byte found to XOR with :(\n");
         printf("N");
         _exit(1);
     }

